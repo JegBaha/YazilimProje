@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35707.178 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YazilimProje", "YazilimProje\YazilimProje.csproj", "{0CC20412-BEC7-464C-B7D1-2D0B38E83AFA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YazilimProje.Tests", "YazilimProje.Tests\YazilimProje.Tests.csproj", "{6547B6B3-4BE6-44D9-9550-D4B01A6F1263}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0CC20412-BEC7-464C-B7D1-2D0B38E83AFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CC20412-BEC7-464C-B7D1-2D0B38E83AFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CC20412-BEC7-464C-B7D1-2D0B38E83AFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6547B6B3-4BE6-44D9-9550-D4B01A6F1263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6547B6B3-4BE6-44D9-9550-D4B01A6F1263}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6547B6B3-4BE6-44D9-9550-D4B01A6F1263}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6547B6B3-4BE6-44D9-9550-D4B01A6F1263}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
