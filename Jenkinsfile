@@ -32,7 +32,7 @@ pipeline {
                 script {
                     def testProjectPath = '"C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje.Tests\\YazilimProje.Tests.csproj"'
                     def resultsDirectory = '"C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\TestResults"'
-                    bat "dotnet test ${testProjectPath} --logger:trx --results-directory ${resultsDirectory}"
+                    bat "dotnet test ${testProjectPath} --logger trx --results-directory ${resultsDirectory}"
                 }
             }
         }
