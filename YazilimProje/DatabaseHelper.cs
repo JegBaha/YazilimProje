@@ -42,7 +42,7 @@ public class DatabaseHelper
             }
         }
     }
-    //Sa
+    //Sanırım burada bir hata var.
     public DataTable GetCustomers()
     {
         DataTable dt = new DataTable();
