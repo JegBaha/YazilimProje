@@ -42,7 +42,7 @@ public class DatabaseHelper
             }
         }
     }
-    //Sanırım burada bir hata var.
+    //Sanırım burada bir hata var.s
     public DataTable GetCustomers()
     {
         DataTable dt = new DataTable();
