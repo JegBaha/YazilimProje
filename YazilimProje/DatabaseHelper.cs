@@ -11,6 +11,7 @@ public class DatabaseHelper
         {
             con.Open();
             string query = @"
+                IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Customers' AND xtype='U')
                 CREATE TABLE Customers (
                     Id INT PRIMARY KEY IDENTITY,
                     Name NVARCHAR(100),

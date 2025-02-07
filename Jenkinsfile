@@ -31,7 +31,8 @@ pipeline {
             steps {
                 script {
                     def testProjectPath = '"C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje.Tests\\YazilimProje.Tests.csproj"'
-                    bat "dotnet test ${testProjectPath} --logger:trx"
+                    def resultsDirectory = '"C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\TestResults"'
+                    bat "dotnet test ${testProjectPath} --logger:trx --results-directory ${resultsDirectory}"
                 }
             }
         }
