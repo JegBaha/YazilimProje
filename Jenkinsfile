@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     triggers {
-        githubPush()  // GitHub push tetikleyicisi
+        githubPush() // GitHub push tetikleyicisi
     }
 
     stages {
@@ -24,7 +24,6 @@ pipeline {
                     // Dosya yolunu kontrol etme
                     bat 'if exist "C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje.sln" (echo File exists) else (echo File does not exist)'
 
-                    // MSBuild komutu ile projeyi derleme
                     def msBuildPath = '"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe"'
                     def solutionFile = '"C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje.sln"'
                     bat "${msBuildPath} ${solutionFile} /p:Configuration=Release"
@@ -35,13 +34,8 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    // Test proje dosyasının yolu
                     def testProjectPath = 'C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje.Tests\\YazilimProje.Tests.csproj'
-
-                    // Test sonuçlarının kaydedileceği dizin
-                    def resultsDirectory = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\YazilimProje\\TestResults'
-
-                    // .NET test komutunu çalıştırmaa
+                    def resultsDirectory = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\TestResults'
                     bat "dotnet test \"${testProjectPath}\" --logger \"junit;LogFileName=TestResults.xml\" --results-directory \"${resultsDirectory}\""
                 }
             }
@@ -50,7 +44,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Deploy adımlarını buraya ekleyin
+                    // Deploy adımlarınızı buraya ekleyin
                     echo 'Deploying application...'
                 }
             }
@@ -59,14 +53,14 @@ pipeline {
 
     post {
         always {
-            // Derlenen dosyaların arşivlenmesi
             archiveArtifacts artifacts: '**/bin/**/*.*', allowEmptyArchive: true
-
-            // Test sonuçlarının eklenmesi
-            junit '**/TestResults/TestResults.xml'
+            junit 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\TestResults\\TestResults.xml'
         }
         success {
             echo 'Build ve testler başarılı!'
+        }
+        unstable {
+            echo 'Build tamamlandı fakat bazı testler başarısız oldu.'
         }
         failure {
             echo 'Build veya testler başarısız oldu.'
