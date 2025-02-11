@@ -54,7 +54,7 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: '**/bin/**/*.*', allowEmptyArchive: true
-            mstest testResultsFile: 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\TestResults\\TestResults.trx'
+            mstest testResultsFile: '**/TestResults.trx'
         }
         success {
             echo 'Build ve testler başarılı!'
