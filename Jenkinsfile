@@ -39,7 +39,7 @@ pipeline {
                     def testProjectPath = 'C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje.Tests\\YazilimProje.Tests.csproj'
 
                     // Test sonuçlarının kaydedileceği dizin
-                    def resultsDirectory = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\TestResults'
+                    def resultsDirectory = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\YazilimProje\\TestResults'
 
                     // .NET test komutunu çalıştırma
                     bat "dotnet test \"${testProjectPath}\" --logger \"junit;LogFileName=TestResults.xml\" --results-directory \"${resultsDirectory}\""
