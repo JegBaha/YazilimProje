@@ -1,4 +1,7 @@
-﻿namespace YazilimProje
+﻿using System.Windows.Forms;
+using System;
+
+namespace YazilimProje
 {
     partial class Form1
     {
@@ -6,7 +9,7 @@
         /// Gerekli tasarım bileşenleri
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
+        
         /// <summary>
         /// Kullanılan kaynakları temizle
         /// </summary>
@@ -19,7 +22,7 @@
             }
             base.Dispose(disposing);
         }
-
+        
         #region Windows Form Designer generated code
 
         /// <summary>

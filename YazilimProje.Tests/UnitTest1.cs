@@ -12,8 +12,10 @@ namespace YazilimProje.Tests
         [TestInitialize]
         public void Setup()
         {
+
             dbHelper = new DatabaseHelper();
             dbHelper.CreateCustomersTable();
+            dbHelper.ClearCustomersTable(); 
         }
 
         [TestMethod]
@@ -58,7 +60,11 @@ namespace YazilimProje.Tests
 
             // Act
             DataTable customers = dbHelper.GetCustomers();
+            // Assert
+           
 
+            // Detaylı hata mesajı ekleyin
+            Assert.IsTrue(customers.Rows.Count > 0, "Müşteri eklenmedi.");
             // Assert
             Assert.AreEqual(2, customers.Rows.Count);
 

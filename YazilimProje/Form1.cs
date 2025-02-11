@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.IO;
 using System.Windows.Forms;
 
 namespace YazilimProje
@@ -13,6 +14,18 @@ namespace YazilimProje
             InitializeComponent();
             CreateDatabaseTables(); // Tablo oluşturmayı burada çağırabilirsiniz.
             LoadCustomers();
+            string testProjectPath = @"C:\Users\bahab\source\repos\YazilimProje\YazilimProje.Tests\YazilimProje.Tests.csproj";
+
+            if (File.Exists(testProjectPath))
+            {
+                // Dosya bulunduysa uyarı mesajı göster
+                MessageBox.Show("Dosya bulundu.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                // Dosya bulunamadıysa uyarı mesajı göster
+                MessageBox.Show("Dosya bulunamadı.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CreateDatabaseTables()
