@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     def testProjectPath = 'C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje.Tests\\YazilimProje.Tests.csproj'
-                    def resultsDirectory = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\TestResults'
+                    def resultsDirectory = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\YazilimProje\\TestResults'
                     bat "dotnet test \"${testProjectPath}\" --logger \"junit;LogFileName=TestResults.xml\" --results-directory \"${resultsDirectory}\""
                 }
             }
