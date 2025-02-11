@@ -12,10 +12,9 @@ namespace YazilimProje.Tests
         [TestInitialize]
         public void Setup()
         {
-
             dbHelper = new DatabaseHelper();
             dbHelper.CreateCustomersTable();
-            dbHelper.ClearCustomersTable(); 
+            dbHelper.ClearCustomersTable();
         }
 
         [TestMethod]
@@ -45,12 +44,12 @@ namespace YazilimProje.Tests
         public void TestGetCustomers()
         {
             // Arrange
-            string name1 = "Customer 1";
+            string name1 = "Customer 11";
             string phone1 = "1234567890";
             string email1 = "customer1@example.com";
             string address1 = "Address 1";
 
-            string name2 = "Customer 2";
+            string name2 = "Customer 22";
             string phone2 = "0987654321";
             string email2 = "customer2@example.com";
             string address2 = "Address 2";
@@ -60,11 +59,7 @@ namespace YazilimProje.Tests
 
             // Act
             DataTable customers = dbHelper.GetCustomers();
-            // Assert
-           
 
-            // Detaylı hata mesajı ekleyin
-            Assert.IsTrue(customers.Rows.Count > 0, "Müşteri eklenmedi.");
             // Assert
             Assert.AreEqual(2, customers.Rows.Count);
 

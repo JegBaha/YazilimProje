@@ -25,15 +25,7 @@ public class DatabaseHelper
             }
         }
     }
-    public void ClearCustomersTable()
-    {
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-            SqlCommand command = new SqlCommand("DELETE FROM Customers", connection);
-            command.ExecuteNonQuery();
-        }
-    }
+
     public void AddCustomer(string name, string phone, string email, string address)
     {
         using (SqlConnection con = new SqlConnection(connectionString))
@@ -50,7 +42,7 @@ public class DatabaseHelper
             }
         }
     }
-    
+
     public DataTable GetCustomers()
     {
         DataTable dt = new DataTable();
@@ -64,5 +56,18 @@ public class DatabaseHelper
             }
         }
         return dt;
+    }
+
+    public void ClearCustomersTable()
+    {
+        using (SqlConnection con = new SqlConnection(connectionString))
+        {
+            con.Open();
+            string query = "DELETE FROM Customers";
+            using (SqlCommand cmd = new SqlCommand(query, con))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }
