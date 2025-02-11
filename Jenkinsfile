@@ -58,8 +58,8 @@ pipeline {
                 archiveArtifacts artifacts: '**/bin/**/*.*', allowEmptyArchive: true
 
                 // Check if the TRX file exists before trying to process it
-                def testResults = findFiles(glob: '**/TestResults.trx')
-                if (testResults.length > 0) {
+                def trxFile = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\TestResults\\TestResults.trx'
+                if (fileExists(trxFile)) {
                     try {
                         mstest testResultsFile: '**/TestResults.trx'
                     } catch (Exception e) {
