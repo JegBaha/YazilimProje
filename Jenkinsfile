@@ -44,8 +44,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Deploy adımlarınızı buraya ekleyin
+                    // Uygulamayı yerel olarak çalıştırma
                     echo 'Deploying application...'
+                    bat 'start "" "C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje\\bin\\Release\\YazilimProje.exe"'
                 }
             }
         }
@@ -53,8 +54,16 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: '**/bin/**/*.*', allowEmptyArchive: true
-            mstest testResultsFile: '**/TestResults.trx'
+            script {
+                archiveArtifacts artifacts: '**/bin/**/*.*', allowEmptyArchive: true
+                // Check if the TRX file exists before trying to process it
+                def testResults = findFiles(glob: '**/TestResults.trx')
+                if (testResults.length > 0) {
+                    mstest testResultsFile: '**/TestResults.trx'
+                } else {
+                    echo 'No TRX test results found.'
+                }
+            }
         }
         success {
             echo 'Build ve testler başarılı!'
