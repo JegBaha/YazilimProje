@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     def testProjectPath = 'C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje.Tests\\YazilimProje.Tests.csproj'
-                    def resultsDirectory = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\TestResults'
+                    def resultsDirectory = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\YazilimProje\\TestResults'
                     bat "dotnet test \"${testProjectPath}\" --logger \"trx;LogFileName=TestResults.trx\" --results-directory \"${resultsDirectory}\""
                 }
             }
@@ -66,7 +66,7 @@ pipeline {
                 archiveArtifacts artifacts: '**/bin/**/*.*', allowEmptyArchive: true
 
                 // Check if the TRX file exists before trying to process it
-                def trxFile = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\TestResults\\TestResults.trx'
+                def trxFile = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\YazilimProje\\TestResults\\TestResults.trx'
                 if (fileExists(trxFile)) {
                     try {
                         mstest testResultsFile: '**/TestResults.trx'
