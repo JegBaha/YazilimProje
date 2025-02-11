@@ -41,6 +41,7 @@ pipeline {
             }
         }
 
+
         stage('Deploy') {
             steps {
                 script {
@@ -58,6 +59,18 @@ pipeline {
                 }
             }
         }
+	stage('Expose via Ngrok') {
+    		steps {
+        		sh 'ngrok http -region eu 8080 &'
+        		sleep 5
+        		script {
+            			def ngrokUrl = sh(script: "curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url'", returnStdout: true).trim()
+            			echo "Ngrok URL: ${ngrokUrl}"
+        			}
+    			}
+		}
+
+
     }
 
     post {
