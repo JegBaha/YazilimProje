@@ -43,7 +43,7 @@ namespace YazilimProje.Tests
         [TestMethod]
         public void TestGetCustomers()
         {
-            // Arrange
+            // Arrangee
             string name1 = "Customer 11";
             string phone1 = "1234567890";
             string email1 = "customer1@example.com";
