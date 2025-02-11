@@ -35,8 +35,8 @@ pipeline {
             steps {
                 script {
                     def testProjectPath = 'C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje.Tests\\YazilimProje.Tests.csproj'
-                    def resultsDirectory = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\YazilimProje\\TestResults'
-                    bat "dotnet test \"${testProjectPath}\" --logger \"junit;LogFileName=TestResults.xml\" --results-directory \"${resultsDirectory}\""
+                    def resultsDirectory = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\TestResults'
+                    bat "dotnet test \"${testProjectPath}\" --logger \"trx;LogFileName=TestResults.trx\" --results-directory \"${resultsDirectory}\""
                 }
             }
         }
@@ -54,7 +54,7 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: '**/bin/**/*.*', allowEmptyArchive: true
-            junit 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\TestResults\\TestResults.xml'
+            mstest testResultsFile: 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\TestResults\\TestResults.trx'
         }
         success {
             echo 'Build ve testler başarılı!'
