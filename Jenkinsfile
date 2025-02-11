@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    triggers {
+        githubPush()
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -31,8 +35,8 @@ pipeline {
             steps {
                 script {
                     def testProjectPath = 'C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje.Tests\\YazilimProje.Tests.csproj'
-                    def resultsDirectory = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\TestResults'
-                    bat "dotnet test \"${testProjectPath}\" --logger \"trx;LogFileName=TestResults.trx\" --results-directory \"${resultsDirectory}\""
+                    def resultsDirectory = 'C:\\ProgramData\\Jenkins\\workspace\\YazilimProje\\TestResults'
+                    bat "dotnet test \"${testProjectPath}\" --logger \"junit;LogFileName=TestResults.xml\" --results-directory \"${resultsDirectory}\""
                 }
             }
         }
@@ -49,8 +53,8 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\**\\*', allowEmptyArchive: true
-            junit 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\TestResults\\TestResults.trx'
+            archiveArtifacts artifacts: '**/bin/**/*.*', allowEmptyArchive: true
+            junit 'C:\\ProgramData\\Jenkins\\workspace\\YazilimProje\\TestResults\\TestResults.xml'
         }
         success {
             echo 'Build ve testler başarılı!'
