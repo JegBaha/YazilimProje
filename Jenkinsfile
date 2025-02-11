@@ -56,10 +56,15 @@ pipeline {
         always {
             script {
                 archiveArtifacts artifacts: '**/bin/**/*.*', allowEmptyArchive: true
+
                 // Check if the TRX file exists before trying to process it
                 def testResults = findFiles(glob: '**/TestResults.trx')
                 if (testResults.length > 0) {
-                    mstest testResultsFile: '**/TestResults.trx'
+                    try {
+                        mstest testResultsFile: '**/TestResults.trx'
+                    } catch (Exception e) {
+                        echo "Failed to process MSTest results: ${e.getMessage()}"
+                    }
                 } else {
                     echo 'No TRX test results found.'
                 }
