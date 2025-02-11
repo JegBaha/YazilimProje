@@ -44,9 +44,17 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Uygulamayı yerel olarak çalıştırma
                     echo 'Deploying application...'
-                    bat 'start "" "C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje\\bin\\Release\\YazilimProje.exe"'
+
+                    // Çalıştırılabilir dosyanın var olup olmadığını kontrol etme
+                    def exeFile = 'C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje\\bin\\Release\\YazilimProje.exe'
+                    if (fileExists(exeFile)) {
+                        echo "Executable exists: ${exeFile}"
+                        // Uygulamayı yerel olarak çalıştırma
+                        bat "start \"\" \"${exeFile}\""
+                    } else {
+                        echo "Executable not found: ${exeFile}"
+                    }
                 }
             }
         }
