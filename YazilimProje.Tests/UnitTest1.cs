@@ -60,7 +60,7 @@ namespace YazilimProje.Tests
             // Act
             DataTable customers = dbHelper.GetCustomers();
 
-            // Assert
+            // Asserta
             Assert.AreEqual(2, customers.Rows.Count);
 
             DataRow firstRow = customers.Rows[0];
