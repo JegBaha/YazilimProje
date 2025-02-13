@@ -12,7 +12,7 @@ namespace YazilimProje
         public Form1()
         {
             InitializeComponent();
-            CreateDatabaseTables(); // Tablo oluşturmayı burada çağırabilirsiniz.
+            CreateDatabaseTables(); // Tablo oluşturmayı burada çağırabilirsiniz.ş
             LoadCustomers();
             string testProjectPath = @"C:\Users\bahab\source\repos\YazilimProje\YazilimProje.Tests\YazilimProje.Tests.csproj";
 
