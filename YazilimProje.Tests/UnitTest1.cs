@@ -29,7 +29,7 @@ namespace YazilimProje.Tests
             // Act
             dbHelper.AddCustomer(name, phone, email, address);
 
-            // Assert
+            // Assertasasa
             DataTable customers = dbHelper.GetCustomers();
             Assert.IsTrue(customers.Rows.Count > 0);
 
@@ -60,7 +60,7 @@ namespace YazilimProje.Tests
             // Act
             DataTable customers = dbHelper.GetCustomers();
 
-            // Assertaa
+            // Assertaasds
             Assert.AreEqual(2, customers.Rows.Count);
 
             DataRow firstRow = customers.Rows[0];
