@@ -29,12 +29,12 @@ namespace YazilimProje.Tests
             // Act
             dbHelper.AddCustomer(name, phone, email, address);
 
-            // Assertasasa
+            // Assert
             DataTable customers = dbHelper.GetCustomers();
             Assert.IsTrue(customers.Rows.Count > 0);
 
             DataRow lastRow = customers.Rows[customers.Rows.Count - 1];
-            Assert.AreEqual(name, lastRow["Name"]);
+            Assert.AreEqual("Wrong Customer Name", lastRow["Name"]); // Intentionally wrong expected value
             Assert.AreEqual(phone, lastRow["Phone"]);
             Assert.AreEqual(email, lastRow["Email"]);
             Assert.AreEqual(address, lastRow["Address"]);
@@ -43,7 +43,7 @@ namespace YazilimProje.Tests
         [TestMethod]
         public void TestGetCustomers()
         {
-            // Arrangee
+            // Arrange
             string name1 = "Customer 11";
             string phone1 = "1234567890";
             string email1 = "customer1@example.com";
@@ -60,8 +60,8 @@ namespace YazilimProje.Tests
             // Act
             DataTable customers = dbHelper.GetCustomers();
 
-            // Assertaasds
-            Assert.AreEqual(2, customers.Rows.Count);
+            // Assert
+            Assert.AreEqual(1, customers.Rows.Count); // Intentionally wrong expected count (should be 2)
 
             DataRow firstRow = customers.Rows[0];
             Assert.AreEqual(name1, firstRow["Name"]);
