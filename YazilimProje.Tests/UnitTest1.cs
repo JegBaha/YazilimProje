@@ -34,7 +34,7 @@ namespace YazilimProje.Tests
             Assert.IsTrue(customers.Rows.Count > 0);
 
             DataRow lastRow = customers.Rows[customers.Rows.Count - 1];
-            Assert.AreEqual("Wrong Customer Name", lastRow["Name"]); // Deliberately wrong to fail
+            Assert.AreEqual("Incorrect Customer Name", lastRow["Name"]); // Deliberately wrong to fail
             Assert.AreEqual(phone, lastRow["Phone"]);
             Assert.AreEqual(email, lastRow["Email"]);
             Assert.AreEqual(address, lastRow["Address"]);
@@ -61,7 +61,7 @@ namespace YazilimProje.Tests
             DataTable customers = dbHelper.GetCustomers();
 
             // Assert
-            Assert.AreEqual(1, customers.Rows.Count); // Deliberately wrong to fail (expects 1, actual is 2)
+            Assert.AreEqual(3, customers.Rows.Count); // Deliberately wrong to fail (expects 3, actual is 2)
 
             DataRow firstRow = customers.Rows[0];
             Assert.AreEqual(name1, firstRow["Name"]);
