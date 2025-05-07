@@ -43,6 +43,20 @@ public class DatabaseHelper
         }
     }
 
+    public DataTable GetCustomers()
+    {
+        DataTable dt = new DataTable();
+        using (SqlConnection con = new SqlConnection(connectionString))
+        {
+            con.Open();
+            string query = "SELECT * FROM Customers";
+            using (SqlDataAdapter da = new SqlDataAdapter(query, con))
+            {
+                da.Fill(dt);
+            }
+        }
+        return dt;
+    }
 
     public void ClearCustomersTable()
     {
