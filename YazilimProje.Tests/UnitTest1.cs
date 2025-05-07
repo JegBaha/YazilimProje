@@ -31,13 +31,7 @@ namespace YazilimProje.Tests
 
             // Assert
             DataTable customers = dbHelper.GetCustomers();
-            Assert.IsTrue(customers.Rows.Count > 0);
-
-            DataRow lastRow = customers.Rows[customers.Rows.Count - 1];
-            Assert.AreEqual("Incorrect Customer Name", lastRow["Name"]); // Deliberately wrong to fail
-            Assert.AreEqual(phone, lastRow["Phone"]);
-            Assert.AreEqual(email, lastRow["Email"]);
-            Assert.AreEqual(address, lastRow["Address"]);
+            Assert.AreEqual(0, customers.Rows.Count, "Expected no rows, but found some."); // Deliberately wrong: expects 0, actual should be 1
         }
 
         [TestMethod]
@@ -57,23 +51,14 @@ namespace YazilimProje.Tests
             dbHelper.AddCustomer(name1, phone1, email1, address1);
             dbHelper.AddCustomer(name2, phone2, email2, address2);
 
-            // Act
-            DataTable customers = dbHelper.GetCustomers();
-
             // Assert
-            Assert.AreEqual(3, customers.Rows.Count); // Deliberately wrong to fail (expects 3, actual is 2)
+            Assert.AreEqual(1, 2, "Deliberate failure for demonstration."); // Hardcoded failure
+        }
 
-            DataRow firstRow = customers.Rows[0];
-            Assert.AreEqual(name1, firstRow["Name"]);
-            Assert.AreEqual(phone1, firstRow["Phone"]);
-            Assert.AreEqual(email1, firstRow["Email"]);
-            Assert.AreEqual(address1, firstRow["Address"]);
-
-            DataRow secondRow = customers.Rows[1];
-            Assert.AreEqual(name2, secondRow["Name"]);
-            Assert.AreEqual(phone2, secondRow["Phone"]);
-            Assert.AreEqual(email2, secondRow["Email"]);
-            Assert.AreEqual(address2, secondRow["Address"]);
+        [TestMethod]
+        public void TestAlwaysFails()
+        {
+            Assert.IsTrue(false, "This test is designed to fail for Jenkins demonstration.");
         }
     }
 }
