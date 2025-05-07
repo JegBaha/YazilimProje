@@ -9,6 +9,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 git url: 'https://github.com/JegBaha/YazilimProje.git', branch: 'master', credentialsId: '7112aeee-81fa-4d0e-9542-ed1518e4be10'
+                // Debug: List workspace contents
+                bat 'dir "${WORKSPACE}"'
             }
         }
 
@@ -21,11 +23,12 @@ pipeline {
                     // Çalışma dizinini yazdırma
                     bat 'echo %cd%'
 
-                    // Dosya yolunu kontrol etme
-                    bat 'if exist "C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje.sln" (echo File exists) else (echo File does not exist)'
+                    // Solution dosyasını kontrol etme
+                    bat 'if exist "${WORKSPACE}\\YazilimProje.sln" (echo Solution file exists) else (echo Solution file does not exist)'
 
+                    // MSBuild ile build
                     def msBuildPath = '"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe"'
-                    def solutionFile = '"C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje.sln"'
+                    def solutionFile = '"${WORKSPACE}\\YazilimProje.sln"'
                     bat "${msBuildPath} ${solutionFile} /p:Configuration=Release"
                 }
             }
@@ -34,13 +37,19 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    def testProjectPath = 'C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje.Tests\\YazilimProje.Tests.csproj'
-                    def resultsDirectory = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\YazilimProje\\TestResults'
-                    bat "dotnet test \"${testProjectPath}\" --logger \"trx;LogFileName=TestResults.trx\" --results-directory \"${resultsDirectory}\""
+                    // Test proje dosyasını kontrol etme
+                    def testProjectPath = "${WORKSPACE}\\YazilimProje.Tests\\YazilimProje.Tests.csproj"
+                    bat 'if exist "${testProjectPath}" (echo Test project exists) else (echo Test project does not exist)'
+
+                    // Test sonuçları dizinini oluşturma
+                    def resultsDirectory = "${WORKSPACE}\\TestResults"
+                    bat 'mkdir "${resultsDirectory}" || echo Results directory already exists'
+
+                    // dotnet test ile testleri çalıştırma, verbose çıktı için --verbosity detailed
+                    bat "dotnet test \"${testProjectPath}\" --logger \"trx;LogFileName=TestResults.trx\" --results-directory \"${resultsDirectory}\" --verbosity detailed"
                 }
             }
         }
-
 
         stage('Deploy') {
             steps {
@@ -48,7 +57,7 @@ pipeline {
                     echo 'Deploying application...'
 
                     // Çalıştırılabilir dosyanın var olup olmadığını kontrol etme
-                    def exeFile = 'C:\\Users\\bahab\\source\\repos\\YazilimProje\\YazilimProje\\bin\\Release\\YazilimProje.exe'
+                    def exeFile = "${WORKSPACE}\\YazilimProje\\bin\\Release\\YazilimProje.exe"
                     if (fileExists(exeFile)) {
                         echo "Executable exists: ${exeFile}"
                         // Uygulamayı yerel olarak çalıştırma
@@ -59,8 +68,6 @@ pipeline {
                 }
             }
         }
-	
-
     }
 
     post {
@@ -68,11 +75,11 @@ pipeline {
             script {
                 archiveArtifacts artifacts: '**/bin/**/*.*', allowEmptyArchive: true
 
-                // Check if the TRX file exists before trying to process it
-                def trxFile = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\YazilimProje\\YazilimProje\\TestResults\\TestResults.trx'
+                // TRX dosyasının varlığını kontrol etme
+                def trxFile = "${WORKSPACE}\\TestResults\\TestResults.trx"
                 if (fileExists(trxFile)) {
                     try {
-                        mstest testResultsFile: '**/TestResults.trx'
+                        mstest testResultsFile: 'TestResults\\TestResults.trx'
                     } catch (Exception e) {
                         echo "Failed to process MSTest results: ${e.getMessage()}"
                     }
