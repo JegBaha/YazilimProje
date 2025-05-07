@@ -64,7 +64,7 @@ namespace YazilimProje.Tests
             Assert.AreEqual(2, customers.Rows.Count);
 
             DataRow firstRow = customers.Rows[0];
-            Assert.AreEqual(name1, firstRow["Namee"]);
+            Assert.AreEqual("FailName", firstRow["Name"]);
             Assert.AreEqual(phone1, firstRow["Phone"]);
             Assert.AreEqual(email1, firstRow["Email"]);
             Assert.AreEqual(address1, firstRow["Address"]);
