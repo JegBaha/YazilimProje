@@ -10,7 +10,7 @@ namespace YazilimProje
     {
         /// <summary>
         /// Uygulamanın ana girdi noktası.
-        /// </summary>ğ
+        /// </summary>ğa
         [STAThread]
         static void Main()
         {
