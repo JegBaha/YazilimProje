@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-/// </summary>ğ
+/// </summary>ğsa
 public class DatabaseHelper
 {
     private string connectionString = "Server=localhost;Database=master;Trusted_Connection=True;";
